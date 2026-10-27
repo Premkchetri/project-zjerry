@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project ZJERRY | Tech Help</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: #f4f7ff;
+    }
+    header {
+      padding: 24px 18px;
+      background: #151e35;
+      border-bottom: 1px solid #293654;
+    }
+    .logo { color: #65e6bd; font-size: 25px; font-weight: bold; }
+    header p { color: #b9c5df; margin-bottom: 0; }
+    main { padding: 22px 18px; max-width: 650px; margin: auto; }
+    h1 { font-size: 30px; line-height: 1.2; }
+    .intro { color: #bdc9e2; line-height: 1.6; }
+    .item {
+      display: block;
+      width: 100%;
+      margin: 12px 0;
+      padding: 18px;
+      text-align: left;
+      color: white;
+      background: #182541;
+      border: 1px solid #334566;
+      border-radius: 14px;
+      font-size: 17px;
+    }
+    .item span { display: block; margin-top: 7px; color: #b9c5df; font-size: 14px; }
+    .item:focus, .item:hover { border-color: #65e6bd; }
+    #answer {
+      display: none;
+      padding: 18px;
+      margin-top: 20px;
+      background: #142e30;
+      border-radius: 14px;
+      line-height: 1.7;
+    }
+    #answer button {
+      padding: 11px 15px;
+      border: 0;
+      border-radius: 8px;
+      background: #65e6bd;
+      color: #0b1020;
+      font-weight: bold;
+    }
+    footer { text-align: center; padding: 25px; color: #9eabc4; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">ZJERRY ⚡</div>
+    <p>Your friendly technology troubleshooting guide</p>
+  </header>
+
+  <main>
+    <h1>Let's fix your tech problem.</h1>
+    <p class="intro">Choose the problem you're facing. We'll guide you through simple steps, one at a time.</p>
+
+    <button class="item" onclick="showHelp('wifi')">
+      📶 Wi-Fi or Internet
+      <span>Connected but no internet, or slow Wi-Fi</span>
+    </button>
+
+    <button class="item" onclick="showHelp('pc')">
+      💻 Slow computer
+      <span>Computer freezing, lagging, or running slowly</span>
+    </button>
+
+    <button class="item" onclick="showHelp('phone')">
+      📱 Phone problems
+      <span>Phone hanging, apps crashing, or storage full</span>
+    </button>
+
+    <section id="answer" aria-live="polite">
+      <h2 id="helpTitle">Let's troubleshoot</h2>
+      <ol id="helpSteps"></ol>
+      <button onclick="resetHelp()">Choose another problem</button>
+    </section>
+  </main>
+
+  <footer>Project ZJERRY · Built to make tech easier for everyone.</footer>
+
+  <script>
+    function showHelp(type) {
+      const guides = {
+        wifi: {
+          title: "Fix your Wi-Fi",
+          steps: [
+            "Check whether Wi-Fi is turned on and Airplane mode is off.",
+            "Disconnect and reconnect to your Wi-Fi network.",
+            "Restart your router if you can safely access it.",
+            "Test another device to see whether the problem affects only one device."
+          ]
+        },
+        pc: {
+          title: "Fix a slow computer",
+          steps: [
+            "Save your work and close apps you are not using.",
+            "Restart the computer normally.",
+            "Check free storage space and remove only files you no longer need.",
+            "Open Task Manager to see whether memory or disk usage is unusually high."
+          ]
+        },
+        phone: {
+          title: "Fix phone problems",
+          steps: [
+            "Restart your phone.",
+            "Check whether your phone has enough free storage.",
+            "Update the affected app from its official app store.",
+            "If one app keeps crashing, clear its cache through Settings if that option is available."
+          ]
+        }
+      };
+
+      const guide = guides[type];
+      document.getElementById("helpTitle").textContent = guide.title;
+      const list = document.getElementById("helpSteps");
+      list.replaceChildren();
+
+      guide.steps.forEach(function(step) {
+        const li = document.createElement("li");
+        li.textContent = step;
+        list.appendChild(li);
+      });
+
+      document.getElementById("answer").style.display = "block";
+      document.getElementById("answer").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function resetHelp() {
+      document.getElementById("answer").style.display = "none";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
